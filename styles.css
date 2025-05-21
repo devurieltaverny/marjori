@@ -1,0 +1,526 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blood-red: #5e0000;
+    --dark-red: #3a0000;
+    --vampire-black: #0a0a0a;
+    --gothic-gray: #1a1a1a;
+    --candle-light: #c9a66b;
+    --ancient-parchment: #e6d8b5;
+    --rusty-metal: #5c4d3c;
+    --gothic-purple: #3a003a;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    font-family: 'EB Garamond', 'Times New Roman', serif;
+    background-color: var(--vampire-black);
+    color: var(--ancient-parchment);
+    line-height: 1.8;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.gothic-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background: 
+        radial-gradient(ellipse at 20% 20%, rgba(94, 0, 0, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(58, 0, 58, 0.4) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--vampire-black), #000);
+    animation: bg-pulse 15s infinite alternate;
+}
+
+@keyframes bg-pulse {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+.gothic-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9;
+    background: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 0 L100 100 M100 0 L0 100" stroke="%235e0000" stroke-width="0.3" opacity="0.1"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%233a003a" stroke-width="0.2" fill="none" opacity="0.1"/></svg>');
+    background-size: 100px 100px, 150px 150px;
+    pointer-events: none;
+}
+
+.candle-flicker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -8;
+    background: 
+        radial-gradient(ellipse at 30% 40%, rgba(201, 166, 107, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse at 70% 60%, rgba(94, 0, 0, 0.05) 0%, transparent 70%);
+    animation: candle-flicker-anim 7s infinite alternate;
+}
+
+.gothic-bg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        rgba(94, 0, 0, 0.2) 0%, 
+        transparent 20%, 
+        transparent 80%, 
+        rgba(94, 0, 0, 0.2) 100%);
+    pointer-events: none;
+    animation: blood-drip 12s infinite ease-in-out;
+}
+
+@keyframes blood-drip {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 0.6; transform: translateY(5px); }
+}
+
+@keyframes candle-flicker-anim {
+    0%, 100% { opacity: 0.7; }
+    20% { opacity: 0.5; transform: translateX(1px) rotate(0.1deg); }
+    40% { opacity: 0.8; transform: translateX(-1px) rotate(-0.1deg); }
+    60% { opacity: 0.6; }
+    80% { opacity: 0.9; }
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 85%, 
+        rgba(94, 0, 0, 0.15) 95%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ===== HEADER STYLES ===== */
+header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, 
+        transparent, 
+        var(--blood-red), 
+        var(--gothic-purple), 
+        var(--blood-red), 
+        transparent);
+    box-shadow: 0 0 10px rgba(94, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    color: transparent;
+    background: linear-gradient(to bottom, #8a0000, #5e0000, #3a003a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 
+        0 0 10px rgba(94, 0, 0, 0.4),
+        0 0 20px rgba(94, 0, 0, 0.2);
+    letter-spacing: 8px;
+    font-family: 'UnifrakturMaguntia', cursive;
+    margin-bottom: 0.5rem;
+    animation: text-glow 8s infinite alternate;
+    line-height: 1.1;
+    position: relative;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(to right, 
+        transparent, 
+        rgba(94, 0, 0, 0.5), 
+        transparent);
+}
+
+@keyframes text-glow {
+    0%, 100% { 
+        text-shadow: 
+            0 0 10px rgba(94, 0, 0, 0.4),
+            0 0 20px rgba(94, 0, 0, 0.2);
+    }
+    50% { 
+        text-shadow: 
+            0 0 15px rgba(94, 0, 0, 0.7),
+            0 0 25px rgba(94, 0, 0, 0.4),
+            0 0 35px rgba(94, 0, 0, 0.2);
+    }
+}
+
+/* ===== GOTHIC DECORATION ===== */
+.gothic-decoration {
+    margin: 1rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.gothic-decoration::before,
+.gothic-decoration::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 20%;
+    height: 1px;
+    background: linear-gradient(to right, 
+        transparent, 
+        var(--blood-red), 
+        transparent);
+}
+
+.gothic-decoration::before {
+    left: 5%;
+}
+
+.gothic-decoration::after {
+    right: 5%;
+}
+
+.gothic-decoration span {
+    display: inline-block;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: var(--blood-red);
+    margin: 0 0.8rem;
+    text-shadow: 
+        0 0 10px var(--blood-red),
+        0 0 20px rgba(94, 0, 0, 0.5);
+    animation: float 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.gothic-decoration span:hover {
+    transform: scale(1.2);
+    color: #8a0000;
+}
+
+.gothic-decoration span:nth-child(1) { animation-delay: 0s; }
+.gothic-decoration span:nth-child(2) { animation-delay: 0.5s; }
+.gothic-decoration span:nth-child(3) { animation-delay: 1s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* ===== PHOTO CONTAINER ===== */
+.photo-container {
+    width: clamp(250px, 40vw, 350px);
+    height: clamp(350px, 60vw, 500px);
+    border: 1px solid var(--rusty-metal);
+    position: relative;
+    box-shadow: 
+        0 0 25px rgba(94, 0, 0, 0.5),
+        inset 0 0 15px rgba(0, 0, 0, 0.7),
+        0 0 5px rgba(58, 0, 58, 0.8);
+    background-color: #111;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    perspective: 1000px;
+    margin: 1.5rem 0;
+}
+
+.photo-container:hover, 
+.photo-container:focus {
+    transform: scale(1.03) rotateX(1deg) rotateY(1deg);
+    box-shadow: 
+        0 0 35px rgba(94, 0, 0, 0.7),
+        inset 0 0 20px rgba(0, 0, 0, 0.9),
+        0 0 10px rgba(58, 0, 58, 1);
+    outline: none;
+}
+
+.photo-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(135deg, rgba(94, 0, 0, 0.3) 0%, transparent 50%),
+        linear-gradient(-135deg, rgba(58, 0, 58, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.photo-container::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(94, 0, 0, 0.6);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* ===== PHOTO COVER ===== */
+.photo-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--gothic-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 4;
+    background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="50" height="50" x="0" y="0" fill="%23101010"/><rect width="50" height="50" x="50" y="50" fill="%23101010"/></svg>'),
+        linear-gradient(to bottom, rgba(94, 0, 0, 0.5), rgba(20, 0, 0, 0.9));
+    background-size: 30px 30px, cover;
+}
+
+.photo-cover span {
+    color: var(--blood-red);
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 8px rgba(94, 0, 0, 0.9),
+        0 0 15px rgba(94, 0, 0, 0.5);
+    text-align: center;
+    padding: 0 20px;
+    font-family: 'Cinzel Decorative', serif;
+    animation: pulse 3s infinite alternate;
+    position: relative;
+    z-index: 1;
+}
+
+.photo-cover::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 1px solid rgba(94, 0, 0, 0.7);
+    pointer-events: none;
+}
+
+.photo-cover::after {
+    content: "✠";
+    position: absolute;
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    color: rgba(94, 0, 0, 0.3);
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+    z-index: 0;
+}
+
+.photo-cover.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.1);
+}
+
+/* ===== PHOTO STYLES ===== */
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.8s ease, filter 1.8s ease;
+    z-index: 1;
+    filter: sepia(0.4) contrast(1.1) brightness(0.8) saturate(0.8);
+}
+
+.photo.revealed {
+    opacity: 1;
+    filter: sepia(0.3) contrast(1.1) brightness(0.85) saturate(0.9);
+}
+
+/* ===== FOOTER STYLES ===== */
+footer {
+    margin-top: 1.5rem;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    color: var(--rusty-metal);
+    letter-spacing: 1.5px;
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    position: relative;
+    padding-top: 1rem;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 1px;
+    background: linear-gradient(to right, 
+        transparent, 
+        var(--blood-red), 
+        var(--gothic-purple), 
+        var(--blood-red), 
+        transparent);
+}
+
+footer p {
+    position: relative;
+    display: inline-block;
+}
+
+footer p::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, 
+        transparent, 
+        var(--blood-red), 
+        transparent);
+}
+
+/* ===== PARTICLE EFFECTS ===== */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 50%;
+    background: var(--blood-red);
+    opacity: 0;
+    animation: particle-fade 1.5s ease-out forwards;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.7));
+}
+
+@keyframes particle-fade {
+    0% { 
+        opacity: 0;
+        transform: translate(0, 0) scale(1);
+    }
+    20% { 
+        opacity: 0.9;
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}
+
+/* ===== CRACK EFFECT ===== */
+.crack-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    animation: crack-fade 1.5s ease-out forwards;
+}
+
+@keyframes crack-fade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.crack-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--vampire-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blood-red);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8a0000;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        letter-spacing: 5px;
+    }
+    
+    .photo-container {
+        width: clamp(220px, 70vw, 300px);
+        height: clamp(320px, 90vw, 420px);
+    }
+    
+    .gothic-decoration span {
+        margin: 0 0.5rem;
+    }
+}
