@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marjori - Site</title>
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #0a0a0a;
+            color: #c0c0c0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(70, 0, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(70, 0, 0, 0.1) 0%, transparent 20%);
+        }
+        
+        /* Efeito de veludo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Cabeçalho */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #800000, transparent);
+        }
+        
+        /* Nome Marjori */
+        h1 {
+            font-size: 5rem;
+            color: #800000;
+            text-shadow: 0 0 10px rgba(128, 0, 0, 0.5), 
+                         0 0 20px rgba(128, 0, 0, 0.3),
+                         0 0 30px rgba(128, 0, 0, 0.2);
+            letter-spacing: 5px;
+            font-weight: normal;
+            font-family: 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: flicker 8s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 
+                    0 0 10px rgba(128, 0, 0, 0.5), 
+                    0 0 20px rgba(128, 0, 0, 0.3),
+                    0 0 30px rgba(128, 0, 0, 0.2);
+            }
+            20%, 24%, 55% {
+                text-shadow: 
+                    0 0 5px rgba(128, 0, 0, 0.3), 
+                    0 0 10px rgba(128, 0, 0, 0.2),
+                    0 0 15px rgba(128, 0, 0, 0.1);
+            }
+        }
+        
+        /* Container da foto */
+        .photo-container {
+            width: 300px;
+            height: 400px;
+            margin: 0 auto 3rem;
+            border: 1px solid #333;
+            position: relative;
+            box-shadow: 0 0 30px rgba(128, 0, 0, 0.3);
+            background-color: #111;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .photo-container::before, .photo-container::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .photo-container::before {
+            background: 
+                linear-gradient(135deg, rgba(128, 0, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(-135deg, rgba(128, 0, 0, 0.1) 0%, transparent 50%);
+        }
+        
+        .photo-container::after {
+            border: 1px solid rgba(128, 0, 0, 0.3);
+            margin: 5px;
+        }
+        
+        /* Estilo para a foto que será inserida */
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: sepia(0.3) contrast(1.1) brightness(0.9);
+        }
+        
+        /* Decoração gótica */
+        .gothic-decoration {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .gothic-decoration span {
+            display: inline-block;
+            font-size: 2rem;
+            color: #800000;
+            margin: 0 10px;
+        }
+        
+        /* Rodapé */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            position: relative;
+            font-size: 0.8rem;
+            color: #555;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #800000, transparent);
+        }
+        
+        /* Efeitos de vela tremulante */
+        .candle-light {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(ellipse at center, rgba(128, 0, 0, 0.05) 0%, transparent 70%);
+            animation: flicker-light 5s infinite alternate;
+        }
+        
+        @keyframes flicker-light {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            25%, 75% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.9;
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .photo-container {
+                width: 250px;
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="candle-light"></div>
+    
+    <div class="container">
+        <header>
+            <h1>MARJORI</h1>
+            
+            <div class="gothic-decoration">
+                <span>✝</span>
+                <span>⚰</span>
+                <span>✞</span>
+            </div>
+        </header>
+        
+        <main>
+            <div class="photo-container">
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#333; font-style:italic;">
+                    <img src="marjori.png" alt="Marjori" class="photo">
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 Marjori - Todos os direitos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>
